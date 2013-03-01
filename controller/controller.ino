@@ -327,6 +327,8 @@ void process100HzTask() {
     
     // Calculate Heading
     yawError = commandYawAttitude - kinematicsAngle[ZAXIS];
+    if (yawError > PI) yawError -= TWO_PI;
+    else if (yawError < -PI) yawError += TWO_PI;         
     Serial.println(yawError);
     
     if (flightMode == ATTITUDE_MODE) {
