@@ -39,6 +39,8 @@ float kinematicsAngle[3];
 
 // FlightController commands definitions
 float commandYaw, commandYawAttitude, commandPitch, commandRoll, commandThrottle;
+float yawError;
+float yawSetpoint = 0.0;
 
 // PID variables
 float YawCommandPIDSpeed, PitchCommandPIDSpeed, RollCommandPIDSpeed;

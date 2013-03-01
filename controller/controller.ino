@@ -192,7 +192,7 @@ void setup() {
     readEEPROM();
     
     // Initialize PID objects with data from EEPROM
-    yaw_command_pid = PID(&kinematicsAngle[ZAXIS], &YawCommandPIDSpeed, &commandYaw, 
+    yaw_command_pid = PID(&yawError, &YawCommandPIDSpeed, &yawSetpoint, 
         &CONFIG.data.PID_YAW_c[P], &CONFIG.data.PID_YAW_c[I], &CONFIG.data.PID_YAW_c[D], &CONFIG.data.PID_YAW_c[WG]);
         
     pitch_command_pid = PID(&kinematicsAngle[YAXIS], &PitchCommandPIDSpeed, &commandPitch, 
@@ -324,6 +324,10 @@ void process100HzTask() {
     
     // Update kinematics with latest data
     kinematics_update(gyro[XAXIS], gyro[YAXIS], gyro[ZAXIS], accel[XAXIS], accel[YAXIS], accel[ZAXIS]);
+    
+    // Calculate Heading
+    yawError = commandYawAttitude - kinematicsAngle[ZAXIS];
+    Serial.println(yawError);
     
     if (flightMode == ATTITUDE_MODE) {
         // Compute command PIDs (with kinematics correction)
