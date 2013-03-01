@@ -36,11 +36,11 @@ uint8_t Alive_LED_state = 0;
 
 // Kinematics variable defnitions
 float kinematicsAngle[3];
+float kinematicsYawError;
+float kinematicsYawSetpoint = 0.0;
 
 // FlightController commands definitions
 float commandYaw, commandYawAttitude, commandPitch, commandRoll, commandThrottle;
-float yawError;
-float yawSetpoint = 0.0;
 
 // PID variables
 float YawCommandPIDSpeed, PitchCommandPIDSpeed, RollCommandPIDSpeed;
