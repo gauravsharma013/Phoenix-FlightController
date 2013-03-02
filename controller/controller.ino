@@ -326,7 +326,7 @@ void process100HzTask() {
     kinematics_update(gyro[XAXIS], gyro[YAXIS], gyro[ZAXIS], accel[XAXIS], accel[YAXIS], accel[ZAXIS]);
     
     // Calculate Heading
-    kinematicsYawError = commandYawAttitude - kinematicsAngle[ZAXIS];
+    kinematicsYawError = kinematicsAngle[ZAXIS] - commandYawAttitude;
     
     if (kinematicsYawError > PI) kinematicsYawError -= TWO_PI;
     else if (kinematicsYawError < -PI) kinematicsYawError += TWO_PI;         
